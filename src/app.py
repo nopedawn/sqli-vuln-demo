@@ -31,11 +31,12 @@ def login():
     conn = None
 
     try:
-        query = f"SELECT * FROM users WHERE username = '{username}' AND password = '{password}'"
-        
         conn = mysql.connector.connect(**db_config)
         cursor = conn.cursor()
-        cursor.execute(query)
+
+        query = "SELECT * FROM users WHERE username = %s AND password = %s"
+        cursor.execute(query, (username, password))
+        
         user = cursor.fetchone()
         if user:
             return f"Login successful! Welcome, {user[1]}."
