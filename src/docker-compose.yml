@@ -27,6 +27,7 @@ services:
       - mysql
     environment:
       FLASK_ENV: development
+    restart: always
     
   nginx:
     container_name: nginx
